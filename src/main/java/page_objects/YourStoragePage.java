@@ -32,14 +32,4 @@ public class YourStoragePage {
         action.moveToElement(accountDropdown);
         logoutButton.click();
     }
-
-//    protected void waitForElement(WebElement element, Duration timeout) {
-//        new WebDriverWait(WebDriverManager.chromedriver().getWebDriver(), timeout)
-//                .until(ExpectedConditions.visibilityOf(element));
-//    }
-//
-//    protected void waitForElement1(WebElement element, Duration timeout) {
-//        new WebDriverWait(WebDriverManager.getInstance().getWebDriver(), timeout)
-//                .until(ExpectedConditions.visibilityOf(element));
-//    }
 }

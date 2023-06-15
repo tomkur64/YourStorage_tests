@@ -1,4 +1,3 @@
-import lombok.extern.java.Log;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 import page_objects.FileManagerPage;
@@ -7,41 +6,29 @@ import page_objects.LoginPage;
 
 import static page_objects.LocalDriverManager.*;
 
-@Log
-//@Test(invocationCount = 4, threadPoolSize = 2)
 public class ImportFilesTest  {
 
+    //poniższe dane wymagają wypełnienia po pobraniu projektu
     private static final String userLogin = "testUser_performance";
-    private static final String userPassword = "1ol71B8sZvL2r^%an*#3Q0wC";
+    private static final String userPassword = "";
+    private static final String pathToFile = "";
+    private static final String baseFolder = "performance testing";
 
-    @Test(invocationCount = 2, threadPoolSize = 2)
-//    @Test
+    @Test(invocationCount = 15, threadPoolSize = 15)
     public void createNewFolder() throws InterruptedException {
-        System.out.println(Thread.currentThread().getId());
         WebDriver driver = createDriverInstance();
         setWebDriver(driver);
         openGivenUrl("https://yourstorage.cloud/logowanie/");
 
         new LoginPage().loginWithCredentials(userLogin, userPassword);
-        log.info("User " + userLogin + " logged in successfully");
+        FileManagerPage fmPage = new FileManagerPage();
 
-        FileManagerPage page = new FileManagerPage();
-        String baseFolder = "performance testing";
-        page.selectFolderByName(baseFolder);
+        fmPage.selectFolderByName(baseFolder);
+        String newFolderName = fmPage.inputAndStoreNewFolderName();
 
-        String newFolderName = page.inputAndStoreNewFolderName();
+        fmPage.selectFolderByName(baseFolder + "/" + newFolderName);
+        fmPage.uploadFileFromPath(pathToFile);
 
-        page.selectFolderByName(baseFolder +"/"+ newFolderName);
-        page.uploadFileFromPath("/Users/Tomek/Downloads/1925_Golf_GTI_K11_W1.pdf");
-//        page.uploadFileFromPath("/Applications/MySQLWorkbench.app");
-
-        Thread.sleep(3000);
         LocalDriverManager.quitDriver();
     }
-
-//        WebElement logOutButton = driver.findElement(By.xpath(
-//                "//nav[@id='site-navigation']//a[text()='Wyloguj się']"));
-//        logOutButton.click();
-//        new YourStoragePage(driver).logOut(driver);
-//    }
 }

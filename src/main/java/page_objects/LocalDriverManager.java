@@ -33,8 +33,7 @@ public class LocalDriverManager {
     public static WebDriver createDriverInstance() {
         System.setProperty("webdriver.chrome.driver", "./chromedriver");
         ChromeOptions chromeOptions = new ChromeOptions();
-//        chromeOptions.addArguments("--headless");
-        chromeOptions.addArguments("--start maximized");
+        chromeOptions.addArguments("--headless");
         return new ChromeDriver(chromeOptions);
     }
 

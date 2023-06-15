@@ -25,11 +25,10 @@ public class FileManagerPage extends YourStoragePage {
     private WebElement fileUploadInput;
 
     public void selectFolderByName(String folderName) throws InterruptedException {
-        LocalDriverManager.waitForElement(directoryTree, 10);
+        Thread.sleep(2000);
         WebElement folderElement = directoryTree.findElement(By.xpath(".//span[@id][@title='drive/"+folderName+"']"));
         LocalDriverManager.waitUntilClickable(folderElement, 5);
         folderElement.click();
-        Thread.sleep(2000);
     }
 
     public WebElement getActionByName(String actionName) {
@@ -51,7 +50,7 @@ public class FileManagerPage extends YourStoragePage {
         return timestamp;
     }
 
-    public void uploadFileFromPath(String filePath) throws InterruptedException {
+    public void uploadFileFromPath(String filePath) {
         getActionByName("Wyślij pliki").click();
         fileUploadInput.sendKeys(filePath);
         LocalDriverManager.waitForElement(actionToolbar, 100);
